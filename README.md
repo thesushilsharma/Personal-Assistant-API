@@ -6,7 +6,7 @@ To get started, clone the repository and install the dependencies:
 
 ```
 git clone https://github.com/thesushilsharma/Personal-Assistant-API.git
-cd appointment-api
+cd Personal-Assistant-API
 npm install
 ```
 Once you have installed the dependencies, start the server:
