@@ -1,0 +1,12 @@
+{
+    "name": "personal-assistant-api",
+    "version": "1.0.0",
+    "description": "RESTful API for managing appointments",
+    "main": "server.js",
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "chrono-node": "^2.6.3",
+        "express": "^4.17.1",
+        "mongoose": "^5.13.7"
+    }
+}

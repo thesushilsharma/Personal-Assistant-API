@@ -19,14 +19,17 @@ The server will start running on `http://localhost:3000.`
 ### GET /appointments
 This endpoint retrieves appointment information based on a provided date range. The start and end dates are provided as query parameters, like this:
 
-`http://localhost:3000/appointments?startDate=2023-04-20&endDate=2023-04-30`
+`http://localhost:3000/appointments`
 
 ### POST /appointments
 This endpoint creates a new appointment. The appointment information should be provided in the request body as a JSON object with a text property containing the appointment details in natural language. The API will use basic natural language processing to parse the appointment details and create a new appointment. For example:
 
 ```
 {
-  "text": "Create an appointment on April 27th at 2pm for a dentist checkup"
+    "title": "Dentist Appointment",
+    "description": "Checkup and cleaning",
+    "start": "next Wednesday at 2pm",
+    "end": "next Wednesday at 3pm"
 }
 ```
 ### PUT /appointments/:id
@@ -38,18 +41,22 @@ The appointment information should be provided in the request body as a JSON obj
 
 ```
 {
-  "text": "Update appointment 1234 to May 4th at 10am for a haircut"
+  "title": "Meeting with Jane",
+  "description": "Discuss new project proposal",
+  "start": "tomorrow at 2pm",
+  "end": "tomorrow at 3pm"
 }
 ```
 ### DELETE /appointments/:id
 This endpoint deletes an existing appointment. The appointment ID should be provided in the URL, like this:This endpoint deletes an existing appointment. The appointment ID should be provided in the URL, like this:
-`http://localhost:3000/appointments/1234`
+`http://localhost:3000/appointments/1234444`
 
 ## Dependencies
 This project uses the following dependencies:
-- express
-- body-parser
-- nlp-js
+- Express
+- Body-parser
+- MongoDB
+- Chrono-node
 
 ## License
 This project is licensed under the MIT License. See the [LICENSE](https://github.com/thesushilsharma/Personal-Assistant-API/blob/main/LICENSE) file for details.
