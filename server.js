@@ -86,7 +86,7 @@ app.get("/appointments", (req, res) => {
 });
 
 // Get all appointments
-app.get("/appointments/all", (req, res) => {
+app.get("/booking", (req, res) => {
   Appointment.find({}, (err, appointments) => {
     if (err) {
       return res.status(400).json({ error: err.message });
@@ -95,7 +95,7 @@ app.get("/appointments/all", (req, res) => {
     // Log the IDs of all the appointments
     console.log(appointments.map((appointment) => appointment._id));
     // Pass the appointments variable to the EJS template
-    res.render("all", { appointments });
+    res.render("booking", { appointments });
   });
 });
 
@@ -217,10 +217,10 @@ app.listen(3000, () => {
 
 // Homepage
 app.get("/", (req, res) => {
-  const apiInfo = {
-    name: "Appointment API",
-    version: "1.0.0",
-    description: "RESTful API for managing appointments",
-  };
-  res.json(apiInfo);
-});
+    const apiInfo = {
+      name: "Appointment API",
+      version: "1.0.0",
+      description: "RESTful API for managing appointments",
+    };
+    res.render("index", { apiInfo });
+  });
