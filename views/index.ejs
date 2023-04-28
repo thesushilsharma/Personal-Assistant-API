@@ -4,15 +4,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>Appointment API</title>
 </head>
-<body>
-    <h1>Welcome to <%= apiInfo.name %></h1>
-    <p>Version: <%= apiInfo.version %></p>
-    <p>Description: <%= apiInfo.description %></p>
-    <ul>
-      <li><a href="/appointments">View all appointments</a></li>
-      <li><a href="/appointments/new">Create a new appointment</a></li>
-    </ul>
-  </body>
+<body class="bg-gray-100">
+  <header class="bg-white shadow">
+    <nav class="container mx-auto px-6 py-4">
+      <div class="flex justify-between items-center">
+        <h1 class="text-lg font-bold"><%= apiInfo.name %></h1>
+        <ul class="flex">
+          <li class="mr-4"><a href="/booking" class="text-gray-800 hover:text-gray-600">View all appointments</a></li>
+          <li><a href="/appointments" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Create a new appointment</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <main class="container mx-auto my-8 px-4">
+    <h2 class="text-xl font-bold mb-4">API Info</h2>
+    <p class="mb-2"><strong>Version:</strong> <%= apiInfo.version %></p>
+    <p class="mb-4"><strong>Description:</strong> <%= apiInfo.description %></p>
+  </main>
+</body>
 </html>

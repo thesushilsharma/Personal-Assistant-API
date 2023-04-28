@@ -5,24 +5,25 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>Post An Appointment</title>
   </head>
-  <body>
-    <h1>Add Appointment</h1>
-    <form action="/appointments" method="post">
-      <label for="title">Title:</label>
-      <input type="text" id="title" name="title" required />
+  <body class="p-4">
+    <h1 class="text-2xl font-bold mb-4">Add Appointment</h1>
+    <form action="/appointments" method="post" class="mb-4">
+      <label for="title" class="block font-semibold mb-2">Title:</label>
+      <input type="text" id="title" name="title" required class="border border-gray-400 p-2 rounded-lg w-full" />
       <br />
-      <label for="description">Description:</label>
-      <textarea id="description" name="description"></textarea>
+      <label for="description" class="block font-semibold mb-2 mt-4">Description:</label>
+      <textarea id="description" name="description" class="border border-gray-400 p-2 rounded-lg w-full"></textarea>
       <br />
-      <label for="start">Start Time:</label>
-      <input type="datetime-local" id="start" name="start" required />
+      <label for="start" class="block font-semibold mb-2 mt-4">Start Time:</label>
+      <input type="datetime-local" id="start" name="start" required class="border border-gray-400 p-2 rounded-lg w-full" />
       <br />
-      <label for="end">End Time:</label>
-      <input type="datetime-local" id="end" name="end" required />
+      <label for="end" class="block font-semibold mb-2 mt-4">End Time:</label>
+      <input type="datetime-local" id="end" name="end" required class="border border-gray-400 p-2 rounded-lg w-full" />
       <br />
-      <button type="submit">Submit</button>
+      <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 mt-4 rounded-lg">Submit</button>
     </form>
   </body>
 </html>

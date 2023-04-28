@@ -4,30 +4,37 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>Manage Appointment</title>
   </head>
-  <body>
-    <h1>Update Appointment</h1>
-    <form method="POST" action="/appointments/<%= appointment.id %>?_method=PUT">
-      <div>
-        <label for="title">Title:</label>
-        <input type="text" name="title" value="<%= appointment ? appointment.title : '' %>" />
-      </div>
-      <div>
-        <label for="description">Description:</label>
-        <textarea name="description"><%= appointment ? appointment.description : '' %></textarea>
-      </div>
-      <div>
-        <label for="start">Start Time:</label>
-        <input type="datetime-local" name="start" value="<%= appointment.start.toISOString() %>"  />
-      </div>
-      <div>
-        <label for="end">End Time:</label>
-        <input type="datetime-local" name="end" value="<%= appointment.end.toISOString() %>" />
-      </div>
-      <input type="hidden" name="_method" value="PUT" />
-      <button type="submit">Update</button>
-    </form>
-    <a href="/appointments">Back to Appointments</a>
+  <body class="bg-gray-100">
+    <header class="bg-white shadow">
+      <nav class="container mx-auto px-6 py-4">
+        <a href="/appointments" class="text-gray-800 hover:text-gray-600">Back to Appointments</a>
+      </nav>
+    </header>
+    <main class="container mx-auto my-8 px-4">
+      <h1 class="text-2xl font-bold mb-4">Update Appointment</h1>
+      <form method="POST" action="/appointments/<%= appointment.id %>?_method=PUT" class="max-w-lg">
+        <div class="mb-4">
+          <label for="title" class="block font-bold mb-2">Title:</label>
+          <input type="text" name="title" value="<%= appointment ? appointment.title : '' %>" class="w-full border border-gray-400 p-2 rounded-md" />
+        </div>
+        <div class="mb-4">
+          <label for="description" class="block font-bold mb-2">Description:</label>
+          <textarea name="description" class="w-full border border-gray-400 p-2 rounded-md"><%= appointment ? appointment.description : '' %></textarea>
+        </div>
+        <div class="mb-4">
+          <label for="start" class="block font-bold mb-2">Start Time:</label>
+          <input type="datetime-local" name="start" value="<%= appointment.start.toISOString() %>" class="w-full border border-gray-400 p-2 rounded-md" />
+        </div>
+        <div class="mb-4">
+          <label for="end" class="block font-bold mb-2">End Time:</label>
+          <input type="datetime-local" name="end" value="<%= appointment.end.toISOString() %>" class="w-full border border-gray-400 p-2 rounded-md" />
+        </div>
+        <input type="hidden" name="_method" value="PUT" />
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Update</button>
+      </form>
+    </main>
   </body>
 </html>
