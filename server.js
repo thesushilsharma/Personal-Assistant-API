@@ -5,6 +5,7 @@ const chrono = require("chrono-node");
 const path = require("path");
 const cors = require("cors");
 var cookieParser = require("cookie-parser");
+const methodOverride = require("method-override");
 
 const app = express();
 
@@ -17,6 +18,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
+
+// Use method-override middleware
+app.use(methodOverride("_method"));
+//mongoose.set('useFindAndModify', false);
 
 const mongo_url =
   "mongodb://mongo:N0OsbufKiL3q76mzN6jj@containers-us-west-58.railway.app:6225/test?authSource=admin";
@@ -100,13 +105,12 @@ app.get("/booking", (req, res) => {
 });
 
 // Search for an appointment
-app
-  .route("/search")
+app.route("/search")
   .get((req, res) => {
     res.render("search");
   })
   .post((req, res) => {
-    const { id } = req.body;
+    const { id, action } = req.body;
 
     Appointment.findById(id, (err, appointment) => {
       if (err) {
@@ -117,99 +121,108 @@ app
         return res.status(404).json({ error: "Appointment not found" });
       }
 
-      res.redirect(`/appointments/${id}/edit`);
+      if (action === "edit") {
+        return res.redirect(`/appointments/${id}/edit`);
+      } else if (action === "delete") {
+        return res.redirect(`/appointments/${id}/delete`);
+      } else {
+        return res.status(400).json({ error: "Invalid action" });
+      }
     });
   });
 
-// Update or edit an appointment
-app
-  .route("/appointments/:id/edit")
-  .all((req, res) => {
-    const { id } = req.params;
-    console.log("0");
-    Appointment.findById(id, (err, appointment) => {
-      if (err) {
-        return res.status(400).json({ error: err.message });
-      }
+// Render the edit view for an appointment
+app.get("/appointments/:id/edit", async (req, res) => {
+  const { id } = req.params;
+  try {
+    // Find the appointment by ID
+    const appointment = await Appointment.findById(id);
 
-      res.render("update", { appointment });
-    });
-  })
-  .put((req, res) => {
-    const { id } = req.params;
-    const { title, description, start, end } = req.body;
-    console.log("1");
-    Appointment.findById(id, (err, appointment) => {
-      if (err) {
-        return res.status(400).json({ error: err.message });
-      }
-      console.log("2");
-      appointment.title = title;
-      appointment.description = description;
-      appointment.start = chrono.parseDate(start);
-      appointment.end = chrono.parseDate(end);
-      console.log("3");
-      appointment.save((err) => {
-        if (err) {
-          return res.status(400).json({ error: err.message });
-        }
+    // If the appointment was not found, return an error
+    if (!appointment) {
+      return res.status(404).json({ error: "Appointment not found" });
+    }
 
-        res.redirect("/");
-      });
-    });
-  });
+    // Render the edit view and pass the appointment data to it
+    res.render("update", { appointment });
+  } catch (err) {
+    console.error("Error finding appointment:", err);
+    res.status(400).json({ error: err.message });
+  }
+});
+
+// Update an appointment
+app.put("/appointments/:id", async (req, res) => {
+  const { id } = req.params;
+  const { title, description, start, end } = req.body;
+  try {
+    // Find the appointment by ID and update its fields
+    const updatedAppointment = await Appointment.findByIdAndUpdate(
+      id,
+      {
+        title,
+        description,
+        start,
+        end
+      },
+      { new: true }
+    );
+
+    // If the appointment was not found, return an error
+    if (!updatedAppointment) {
+      return res.status(404).json({ error: "Appointment not found" });
+    }
+
+    // Return the updated appointment
+    return res.json(updatedAppointment);
+  } catch (err) {
+    // If there was an error, return an error response
+    console.error("Error updating appointment:", err);
+    return res.status(400).json({ error: err.message });
+  }
+});
+
+
+// Render the delete view for an appointment
+app.get("/appointments/:id/delete", async (req, res) => {
+  const { id } = req.params;
+  try {
+    // Find the appointment by ID
+    const appointment = await Appointment.findById(id);
+
+    // If the appointment was not found, return an error
+    if (!appointment) {
+      return res.status(404).json({ error: "Appointment not found" });
+    }
+    // Render the delete view and pass the appointment data to it
+    return res.render("delete", { appointment });
+  } catch (err) {
+    // If there was an error, return an error response
+    console.error("Error finding appointment:", err);
+    return res.status(400).json({ error: err.message });
+  }
+});
 
 // Delete an appointment
-app
-  .route("/appointments/:id/delete")
-  // Render the delete view for an appointment
-  .get(async (req, res) => {
-    const { id } = req.params;
-
-    try {
-      // Find the appointment by ID
-      console.log("Finding appointment with ID:", id);
-      const appointment = await Appointment.findById(id);
-
-      // If the appointment was not found, return an error
-      if (!appointment) {
-        console.log("Appointment not found for ID:", id);
-        return res.status(404).json({ error: "Appointment not found" });
-      }
-
-      // Render the delete view and pass the appointment data to it
-      console.log("Rendering delete view for appointment:", appointment);
-      return res.render("delete", { appointment });
-    } catch (err) {
-      // If there was an error, return an error response
-      console.error("Error finding appointment:", err);
-      return res.status(400).json({ error: err.message });
+app.delete("/appointments/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    // Find the appointment by ID and delete it
+    const deletedAppointment = await Appointment.findByIdAndDelete(id);
+    // If the appointment was not found, return an error
+    if (!deletedAppointment) {
+      return res.status(404).json({ error: "Appointment not found" });
     }
-  })
-  // Delete an appointment
-  .delete(async (req, res) => {
-    const { id } = req.params;
 
-    try {
-      // Find the appointment by ID and delete it
-      console.log("Deleting appointment with ID:", id);
-      const deletedAppointment = await Appointment.findByIdAndDelete(id);
+    // Return a success message
+    return res.json({ message: "Appointment deleted" });
+  } catch (err) {
+    // If there was an error, return an error response
+    console.error("Error deleting appointment:", err);
+    return res.status(400).json({ error: err.message });
+  }
+});
 
-      // If the appointment was not found, return an error
-      if (!deletedAppointment) {
-        console.log("Appointment not found for ID:", id);
-        return res.status(404).json({ error: "Appointment not found" });
-      }
-
-      // Return a success message
-      console.log("Appointment deleted:", deletedAppointment);
-      return res.json({ message: "Appointment deleted" });
-    } catch (err) {
-      // If there was an error, return an error response
-      console.error("Error deleting appointment:", err);
-      return res.status(400).json({ error: err.message });
-    }
-  });
 
 app.listen(3000, () => {
   console.log("Server started on port 3000");
@@ -217,10 +230,10 @@ app.listen(3000, () => {
 
 // Homepage
 app.get("/", (req, res) => {
-    const apiInfo = {
-      name: "Appointment API",
-      version: "1.0.0",
-      description: "RESTful API for managing appointments",
-    };
-    res.render("index", { apiInfo });
-  });
+  const apiInfo = {
+    name: "Personal Assistant API",
+    version: "1.0.0",
+    description: "This is a Node.js application for scheduling appointments. Users can create new appointments, view existing appointments, edit appointments, and delete appointments.",
+  };
+  res.render("index", { apiInfo });
+});

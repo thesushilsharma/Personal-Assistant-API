@@ -16,12 +16,12 @@ The server will start running on `http://localhost:3000.`
 
 ## API endpoints
 
-### GET /appointments
-This endpoint retrieves appointment information based on a provided date range. The start and end dates are provided as query parameters, like this:
+### GET /appointments (Viewing all Appointments)
+This endpoint retrieves appointment information based on a provided ID.
 
-`http://localhost:3000/appointments`
+`http://localhost:3000/booking`
 
-### POST /appointments
+### POST /appointments (Creating an Appointment)
 This endpoint creates a new appointment. The appointment information should be provided in the request body as a JSON object with a text property containing the appointment details in natural language. The API will use basic natural language processing to parse the appointment details and create a new appointment. For example:
 
 ```
@@ -32,10 +32,12 @@ This endpoint creates a new appointment. The appointment information should be p
     "end": "next Wednesday at 3pm"
 }
 ```
-### PUT /appointments/:id
+`http://localhost:3000/appointments`
+
+### PUT /appointments/:id (Editing an Appointment)
 This endpoint updates an existing appointment. The appointment ID should be provided in the URL, like this:
 
-`http://localhost:3000/appointments/1234`
+`http://localhost:3000/appointments/644b90f055a26a3fbc7ad832/edit`
 
 The appointment information should be provided in the request body as a JSON object with a `text` property containing the updated appointment details in natural language. The API will use basic natural language processing to parse the updated appointment details and update the appointment. For example:
 
@@ -47,9 +49,13 @@ The appointment information should be provided in the request body as a JSON obj
   "end": "tomorrow at 3pm"
 }
 ```
-### DELETE /appointments/:id
+### DELETE /appointments/:id/delete (Deleting an Appointment)
 This endpoint deletes an existing appointment. The appointment ID should be provided in the URL, like this:This endpoint deletes an existing appointment. The appointment ID should be provided in the URL, like this:
-`http://localhost:3000/appointments/1234444`
+`http://localhost:3000/appointments/644aefa0a27c110ea49a1fd7/delete`
+
+### DELETE /search (Searching for an Appointment)
+To search for an existing appointment, click the "Search" button on the home page. Enter the appointment ID and click "Search" to search for the appointment. If the appointment is found, you will be redirected to the appointment's details page. The appointment ID should be provided in the URL, like this:
+`http://localhost:3000/search`
 
 ## Dependencies
 This project uses the following dependencies:

@@ -5,14 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Search </title>
+    <title>Search</title>
 </head>
 <body class="bg-gray-100">
     <h1 class="text-2xl font-bold mb-4">Search Appointment</h1>
     <form action="/search" method="POST" class="flex flex-col space-y-4">
       <label for="id" class="font-medium">Appointment ID:</label>
       <input type="text" id="id" name="id" required class="p-2 rounded border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-      <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Search</button>
-    </form>
+      <button type="submit" name="action" value="edit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Edit</button>
+      <button type="submit" name="action" value="delete" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">Delete</button>
+    </form>    
   </body>  
 </html>

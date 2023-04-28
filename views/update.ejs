@@ -32,7 +32,6 @@
           <label for="end" class="block font-bold mb-2">End Time:</label>
           <input type="datetime-local" name="end" value="<%= appointment.end.toISOString() %>" class="w-full border border-gray-400 p-2 rounded-md" />
         </div>
-        <input type="hidden" name="_method" value="PUT" />
         <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Update</button>
       </form>
     </main>
