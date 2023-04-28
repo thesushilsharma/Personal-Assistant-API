@@ -26,11 +26,11 @@
         </div>
         <div class="mb-4">
           <label for="start" class="block font-bold mb-2">Start Time:</label>
-          <input type="datetime-local" name="start" value="<%= appointment.start.toISOString() %>" class="w-full border border-gray-400 p-2 rounded-md" />
+          <input type="text" name="start" value="<%= appointment.start.toISOString().slice(0,16) %>" class="w-full border border-gray-400 p-2 rounded-md" />
         </div>
         <div class="mb-4">
           <label for="end" class="block font-bold mb-2">End Time:</label>
-          <input type="datetime-local" name="end" value="<%= appointment.end.toISOString() %>" class="w-full border border-gray-400 p-2 rounded-md" />
+          <input type="text" name="end" value="<%= appointment.end.toISOString().slice(0,16) %>" class="w-full border border-gray-400 p-2 rounded-md" />
         </div>
         <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Update</button>
       </form>

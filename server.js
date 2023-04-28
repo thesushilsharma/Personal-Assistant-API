@@ -155,6 +155,11 @@ app.get("/appointments/:id/edit", async (req, res) => {
 app.put("/appointments/:id", async (req, res) => {
   const { id } = req.params;
   const { title, description, start, end } = req.body;
+
+  // Parse the start and end dates using Chrono
+  const parsedStart = chrono.parseDate(start);
+  const parsedEnd = chrono.parseDate(end);
+
   try {
     // Find the appointment by ID and update its fields
     const updatedAppointment = await Appointment.findByIdAndUpdate(
@@ -162,8 +167,8 @@ app.put("/appointments/:id", async (req, res) => {
       {
         title,
         description,
-        start,
-        end
+        start: parsedStart,
+        end: parsedEnd
       },
       { new: true }
     );
