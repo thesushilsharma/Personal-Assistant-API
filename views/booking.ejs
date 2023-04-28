@@ -1,37 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
     <title>View All Appointments</title>
-  </head>
-  <body class="bg-gray-100">
+</head>
+
+<body class="bg-gray-100">
+    <header class="bg-black shadow">
+        <nav class="container mx-auto px-6 py-4">
+          <a href="/" class="text-white hover:text-blue-600">Home Page</a>
+        </nav>
+      </header>
     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <h1 class="text-3xl font-bold text-gray-900 mb-8">All Appointments</h1>
         <div class="bg-white shadow-xl sm:rounded-lg">
-          <table class="min-w-full divide-y divide-gray-200">
+            <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Start</th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">End</th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Description</th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Start
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">End
+                        </th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
-                    <% appointments.forEach((appointment) => { %>
-                    <tr>
-                        <td class="px-6 py-4 whitespace-nowrap"><%= appointment.title %></td>
-                        <td class="px-6 py-4 whitespace-nowrap"><%= appointment.description %></td>
-                        <td class="px-6 py-4 whitespace-nowrap"><%= appointment.start %></td>
-                        <td class="px-6 py-4 whitespace-nowrap"><%= appointment.end %></td>
-                    </tr>
-                    <% }); %>
+                    <% appointments.forEach((appointment)=> { %>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <%= appointment.title %>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <%= appointment.description %>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <%= appointment.start %>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <%= appointment.end %>
+                            </td>
+                        </tr>
+                        <% }); %>
                 </tbody>
             </table>
         </div>
     </div>
+
 </body>
+
 </html>
