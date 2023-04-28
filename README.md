@@ -64,5 +64,8 @@ This project uses the following dependencies:
 - MongoDB
 - Chrono-node
 
+## Database
+Railway.app (Mongodb Database)
+
 ## License
 This project is licensed under the MIT License. See the [LICENSE](https://github.com/thesushilsharma/Personal-Assistant-API/blob/main/LICENSE) file for details.
