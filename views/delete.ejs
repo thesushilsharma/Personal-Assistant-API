@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cancel</title>
+  </head>
+  <body>
+    <h1>Delete Appointment</h1>
+    <p>Are you sure you want to delete this appointment?</p>
+    <p>Title: <%= appointment.title %></p>
+    <p>Description: <%= appointment.description %></p>
+    <p>Start Time: <%= appointment.start %></p>
+    <p>End Time: <%= appointment.end %></p>
+    <form
+      method="POST"
+      action="/appointments/<%= appointment.id %>?_method=DELETE"
+    >
+      <input type="hidden" name="_method" value="DELETE" />
+      <button type="submit">Delete</button>
+    </form>
+  </body>
+</html>
