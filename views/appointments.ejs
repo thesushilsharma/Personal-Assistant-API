@@ -19,16 +19,16 @@
   <h1 class="text-2xl font-bold mb-4">Add Appointment</h1>
   <form action="/appointments" method="post" class="mb-4">
     <label for="title" class="block font-semibold mb-2">Title:</label>
-    <input type="text" id="title" name="title" required class="border border-gray-400 p-2 rounded-lg w-full" />
+    <input type="text" id="title" name="title" required class="border border-gray-400 p-2 rounded-lg w-full" placeholder="Appointment Title"/>
     <br />
     <label for="description" class="block font-semibold mb-2 mt-4">Description:</label>
-    <textarea id="description" name="description" class="border border-gray-400 p-2 rounded-lg w-full"></textarea>
+    <textarea id="description" name="description" class="border border-gray-400 p-2 rounded-lg w-full" placeholder="Describe here..."></textarea>
     <br />
     <label for="start" class="block font-semibold mb-2 mt-4">Start Time:</label>
-    <input type="text" id="start" name="start" required class="border border-gray-400 p-2 rounded-lg w-full" />
+    <input type="text" id="start" name="start" required class="border border-gray-400 p-2 rounded-lg w-full" placeholder="E.g. :  next Wednesday at 2 PM"/>
     <br />
     <label for="end" class="block font-semibold mb-2 mt-4">End Time:</label>
-    <input type="text" id="end" name="end" required class="border border-gray-400 p-2 rounded-lg w-full" />
+    <input type="text" id="end" name="end" required class="border border-gray-400 p-2 rounded-lg w-full" placeholder="Eg. next Wednesday at 3 PM"/>
     <br />
     <button type="submit"
       class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 mt-4 rounded-lg">Submit</button>
