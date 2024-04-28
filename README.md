@@ -80,6 +80,10 @@ This project uses the following dependencies:
 
 Railway.app (Mongodb Database)
 
+## Deployment
+
+You can deploy this API to a production server using a platform like Vercel, Netlify or any of your choice.
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
