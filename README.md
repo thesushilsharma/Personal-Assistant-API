@@ -7,9 +7,9 @@ This is a simple RESTful API for managing appointments. It may obtain appointmen
 To get started, clone the repository and install the dependencies:
 
 ```bash
-  git clone https://github.com/thesushilsharma/Personal-Assistant-API.git
-  cd Personal-Assistant-API
-  npm install
+git clone https://github.com/thesushilsharma/Personal-Assistant-API.git
+cd Personal-Assistant-API
+npm install
 ```
 
 Once you have installed the dependencies, start the server:
@@ -29,14 +29,14 @@ This endpoint retrieves appointment information based on a provided ID.
 
 This endpoint creates a new appointment. The appointment information should be provided in the request body as a JSON object with a text property containing the appointment details in natural language. The API will use basic natural language processing to parse the appointment details and create a new appointment. For example:
 
-`
+```json
 {
     "title": "Dentist Appointment",
     "description": "Checkup and cleaning",
     "start": "next Wednesday at 2pm",
     "end": "next Wednesday at 3pm"
 }
-`
+```
 
 `http://localhost:3000/appointments`
 
@@ -48,14 +48,14 @@ This endpoint updates an existing appointment. The appointment ID should be prov
 
 The appointment information should be provided in the request body as a JSON object with a `text` property containing the updated appointment details in natural language. The API will use basic natural language processing to parse the updated appointment details and update the appointment. For example:
 
-`
+```json
 {
   "title": "Meeting with Jane",
   "description": "Discuss new project proposal",
   "start": "tomorrow at 2pm",
   "end": "tomorrow at 3pm"
 }
-`
+```
 
 ### DELETE /appointments/:id/delete (Deleting an Appointment)
 
